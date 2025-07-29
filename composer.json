@@ -1,0 +1,11 @@
+{
+  "name": "yt2mp3/converter",
+  "description": "YouTube to MP3 Converter with animated background",
+  "version": "1.0.0",
+  "require": {
+    "php": "^8.0"
+  },
+  "scripts": {
+    "start": "php -S 0.0.0.0:$PORT -t ."
+  }
+}
