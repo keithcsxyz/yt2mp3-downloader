@@ -4,14 +4,20 @@ FROM php:8.1-apache
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    python3-venv \
     ffmpeg \
     wget \
     curl \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Install yt-dlp
-RUN pip3 install yt-dlp
+# Install yt-dlp using virtual environment
+RUN python3 -m venv /opt/yt-dlp-venv
+RUN /opt/yt-dlp-venv/bin/pip install --upgrade pip
+RUN /opt/yt-dlp-venv/bin/pip install yt-dlp
+
+# Create symlink for easy access
+RUN ln -s /opt/yt-dlp-venv/bin/yt-dlp /usr/local/bin/yt-dlp
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
